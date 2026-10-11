@@ -1,0 +1,35 @@
+# vsim -do {run -all; quit -f} -l transcript_fast.txt -c -t 1ns work.tb_dingceng_fast 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.tb_dingceng_fast(sim)
+# Loading work.dingceng(rtl)
+# Loading work.fp(a)
+# Loading work.shouhuoji(rtl)
+# Loading work.xianshi(rtl)
+# run -all 
+# ** Note: t=0 ns | price_disp=? need_disp=? mout_disp=? | suc=X showout=X
+#    Time: 0 ns  Iteration: 2  Instance: /tb_dingceng_fast
+# ** Note: t=95 ns | price_disp=? need_disp=? mout_disp=? | suc=0 showout=0
+#    Time: 95 ns  Iteration: 3  Instance: /tb_dingceng_fast
+# ** Note: t=95 ns | price_disp=0 need_disp=0 mout_disp=0 | suc=0 showout=0
+#    Time: 95 ns  Iteration: 5  Instance: /tb_dingceng_fast
+# ** Note: t=195 ns | price_disp=2 need_disp=2 mout_disp=0 | suc=0 showout=0
+#    Time: 195 ns  Iteration: 5  Instance: /tb_dingceng_fast
+# ** Note: t=395 ns | price_disp=2 need_disp=2 mout_disp=0 | suc=1 showout=1
+#    Time: 395 ns  Iteration: 3  Instance: /tb_dingceng_fast
+# ** Note: t=395 ns | price_disp=2 need_disp=0 mout_disp=3 | suc=1 showout=1
+#    Time: 395 ns  Iteration: 5  Instance: /tb_dingceng_fast
+# ** Note: t=495 ns | price_disp=2 need_disp=0 mout_disp=3 | suc=0 showout=0
+#    Time: 495 ns  Iteration: 3  Instance: /tb_dingceng_fast
+# ** Note: t=495 ns | price_disp=0 need_disp=0 mout_disp=0 | suc=0 showout=0
+#    Time: 495 ns  Iteration: 5  Instance: /tb_dingceng_fast
+# ** Note: t=595 ns | price_disp=2 need_disp=2 mout_disp=0 | suc=0 showout=0
+#    Time: 595 ns  Iteration: 5  Instance: /tb_dingceng_fast
+# ** Failure: ==== SIM END (fast mode): item 1 bought, change = 3 ====
+#    Time: 1 us  Iteration: 0  Process: /tb_dingceng_fast/stim File: tb_dingceng_fast.vhd
+# Break in Process stim at tb_dingceng_fast.vhd line 111
+# Stopped at tb_dingceng_fast.vhd line 111 
+#  quit -f 

@@ -1,0 +1,35 @@
+# vsim -do {run -all; quit -f} -l transcript.txt -c -t 1ns work.tb_dingceng 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.tb_dingceng(sim)
+# Loading work.dingceng(rtl)
+# Loading work.fp(a)
+# Loading work.shouhuoji(rtl)
+# Loading work.xianshi(rtl)
+# run -all 
+# ** Note: t=0 us | price_disp=? I1=0000000 | need_disp=? I2=0000000 | mout_disp=? I3=0000000 | suc=X showout=X
+#    Time: 0 ns  Iteration: 2  Instance: /tb_dingceng
+# ** Note: t=999 us | price_disp=? I1=0000000 | need_disp=? I2=0000000 | mout_disp=? I3=0000000 | suc=0 showout=0
+#    Time: 999995 ns  Iteration: 3  Instance: /tb_dingceng
+# ** Note: t=999 us | price_disp=0 I1=0111111 | need_disp=0 I2=0111111 | mout_disp=0 I3=0111111 | suc=0 showout=0
+#    Time: 999995 ns  Iteration: 5  Instance: /tb_dingceng
+# ** Note: t=1999 us | price_disp=2 I1=1011011 | need_disp=2 I2=1011011 | mout_disp=0 I3=0111111 | suc=0 showout=0
+#    Time: 1999995 ns  Iteration: 5  Instance: /tb_dingceng
+# ** Note: t=3999 us | price_disp=2 I1=1011011 | need_disp=2 I2=1011011 | mout_disp=0 I3=0111111 | suc=1 showout=1
+#    Time: 3999995 ns  Iteration: 3  Instance: /tb_dingceng
+# ** Note: t=3999 us | price_disp=2 I1=1011011 | need_disp=0 I2=0111111 | mout_disp=3 I3=1001111 | suc=1 showout=1
+#    Time: 3999995 ns  Iteration: 5  Instance: /tb_dingceng
+# ** Note: t=4999 us | price_disp=2 I1=1011011 | need_disp=0 I2=0111111 | mout_disp=3 I3=1001111 | suc=0 showout=0
+#    Time: 4999995 ns  Iteration: 3  Instance: /tb_dingceng
+# ** Note: t=4999 us | price_disp=0 I1=0111111 | need_disp=0 I2=0111111 | mout_disp=0 I3=0111111 | suc=0 showout=0
+#    Time: 4999995 ns  Iteration: 5  Instance: /tb_dingceng
+# ** Note: t=5999 us | price_disp=2 I1=1011011 | need_disp=2 I2=1011011 | mout_disp=0 I3=0111111 | suc=0 showout=0
+#    Time: 5999995 ns  Iteration: 5  Instance: /tb_dingceng
+# ** Failure: ==== SIM END: buying item 1 finished (price=2, paid=5, change=3) ====
+#    Time: 6 ms  Iteration: 0  Process: /tb_dingceng/stim File: tb_dingceng.vhd
+# Break in Process stim at tb_dingceng.vhd line 154
+# Stopped at tb_dingceng.vhd line 154 
+#  quit -f 

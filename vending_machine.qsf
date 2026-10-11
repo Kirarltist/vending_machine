@@ -1,0 +1,140 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2013 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II 64-Bit
+# Version 13.0.0 Build 156 04/24/2013 SJ Full Version
+# Date created = 10:00:00  January 01, 2026
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) 自动售货机工程骨架，器件与引脚约定来自
+#    《EDA 技术及应用设计》指导书（EP4CE10F17C8N / Cyclone IV E）。
+#
+# 2) 引脚表（板上的资源来自指导书表 1-1、1-2、2-1）：
+#    clk20    = PIN_M1      主板时钟（跳线设 1MHz）
+#    rst2     = PIN_P6      K11，低电平复位
+#    coin2    = PIN_T10/R10 K1=加 1、K0=加 5
+#    pp       = PIN_R9/T9/N9/T8   K2/K3/K4/K5，选货独热码
+#    seg[7:0] = PIN_D12/D11/C11/E10/D9/C9/E9/D16   dp g f e d c b a
+#    sel[2:0] = PIN_F15/C16/D15                    位码（板上经 3-8 译码）
+#    suc2     = PIN_N6      LED0 交易成功
+#    showout2 = PIN_N5      LED1 找零成功
+#    I1/I2/I3 = 不锁引脚，只给 Waveform.vwf 功能仿真观察用
+#
+# -------------------------------------------------------------------------- #
+
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE10F17C8
+set_global_assignment -name TOP_LEVEL_ENTITY dingceng
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:00:00  JANUARY 01, 2026"
+set_global_assignment -name LAST_QUARTUS_VERSION 13.0
+set_global_assignment -name VHDL_FILE dingceng.vhd
+set_global_assignment -name VHDL_FILE fp.vhd
+set_global_assignment -name VHDL_FILE shouhuoji.vhd
+set_global_assignment -name VHDL_FILE xianshi.vhd
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 256
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 8
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+
+# -------------------------------------------------------------------------- #
+# 引脚锁定
+# -------------------------------------------------------------------------- #
+
+set_location_assignment PIN_M1 -to clk20
+
+# 复位：K11（低电平复位，拨上去=0=复位）
+set_location_assignment PIN_P6 -to rst2
+
+# 投币：coin2(1)=K1 加 1，coin2(0)=K0 加 5
+set_location_assignment PIN_T10 -to coin2[1]
+set_location_assignment PIN_R10 -to coin2[0]
+
+# 选货（独热码）：pp(0)=K2  pp(1)=K3  pp(2)=K4  pp(3)=K5
+set_location_assignment PIN_R9 -to pp[0]
+set_location_assignment PIN_T9 -to pp[1]
+set_location_assignment PIN_N9 -to pp[2]
+set_location_assignment PIN_T8 -to pp[3]
+
+# 数码管段码：seg[0]=a ... seg[6]=g, seg[7]=dp
+set_location_assignment PIN_D16 -to seg[0]
+set_location_assignment PIN_E9 -to seg[1]
+set_location_assignment PIN_C9 -to seg[2]
+set_location_assignment PIN_D9 -to seg[3]
+set_location_assignment PIN_E10 -to seg[4]
+set_location_assignment PIN_C11 -to seg[5]
+set_location_assignment PIN_D11 -to seg[6]
+set_location_assignment PIN_D12 -to seg[7]
+
+# 数码管位码（板上经 3-8 译码）
+set_location_assignment PIN_F15 -to sel[0]
+set_location_assignment PIN_C16 -to sel[1]
+set_location_assignment PIN_D15 -to sel[2]
+
+# 状态指示：LED0 / LED1
+set_location_assignment PIN_N6 -to suc2
+set_location_assignment PIN_N5 -to showout2
+
+# I1/I2/I3 是给波形文件（Waveform*.vwf）做功能仿真用的监视端口，不接任何实物引脚。
+# 用 VIRTUAL_PIN 告诉布局布线器"别给它们分配物理引脚"——否则 Quartus 会随手把它们
+# 放到 A5/A6/A7/A8/A9/F6（指导书里 ADC0809 的数据口）和 F7（音频输出）等引脚上，造成争用。
+set_instance_assignment -name VIRTUAL_PIN ON -to I1[0]
+set_instance_assignment -name VIRTUAL_PIN ON -to I1[1]
+set_instance_assignment -name VIRTUAL_PIN ON -to I1[2]
+set_instance_assignment -name VIRTUAL_PIN ON -to I1[3]
+set_instance_assignment -name VIRTUAL_PIN ON -to I1[4]
+set_instance_assignment -name VIRTUAL_PIN ON -to I1[5]
+set_instance_assignment -name VIRTUAL_PIN ON -to I1[6]
+set_instance_assignment -name VIRTUAL_PIN ON -to I2[0]
+set_instance_assignment -name VIRTUAL_PIN ON -to I2[1]
+set_instance_assignment -name VIRTUAL_PIN ON -to I2[2]
+set_instance_assignment -name VIRTUAL_PIN ON -to I2[3]
+set_instance_assignment -name VIRTUAL_PIN ON -to I2[4]
+set_instance_assignment -name VIRTUAL_PIN ON -to I2[5]
+set_instance_assignment -name VIRTUAL_PIN ON -to I2[6]
+set_instance_assignment -name VIRTUAL_PIN ON -to I3[0]
+set_instance_assignment -name VIRTUAL_PIN ON -to I3[1]
+set_instance_assignment -name VIRTUAL_PIN ON -to I3[2]
+set_instance_assignment -name VIRTUAL_PIN ON -to I3[3]
+set_instance_assignment -name VIRTUAL_PIN ON -to I3[4]
+set_instance_assignment -name VIRTUAL_PIN ON -to I3[5]
+set_instance_assignment -name VIRTUAL_PIN ON -to I3[6]
+
+# 如果不需要看波形，也可以把 dingceng.vhd 里这三个端口和对应赋值直接删掉。
+
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
+set_global_assignment -name SIMULATION_MODE FUNCTIONAL
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform1.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform2.vwf
+set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "D:/altera/13.0/kirarl.vhdl/vending_machine/Waveform2.vwf"
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
